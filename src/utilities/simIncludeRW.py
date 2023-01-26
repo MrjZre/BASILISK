@@ -58,6 +58,7 @@ class rwFactory(object):
                 useMaxTorque : BOOL to clip any torque value above a maximum torque value
                 u_max: double with the maximum RW motor torque
                 maxMomentum : maximum RW wheel momentum in Nms.  This is a required variable for some wheels.
+                maxPower : doulbe for the maximum allowed electrical power draw
                 label : string with the unique device name, must be 5 characters or less
                 fCoulomb: double for the Coulomb friction torque model
                 fStatic: double for Static friction torque magnitude
@@ -114,6 +115,15 @@ class rwFactory(object):
         else:
             varMaxMomentum = 0.0              # default value
         self.maxMomentum = varMaxMomentum
+
+        if 'maxPower' in kwargs:
+            varMaxPower = kwargs['maxPower']
+            if not isinstance(varMaxPower, float):
+                print('ERROR: maxPower must be a FLOAT argument')
+                exit(1)
+        else:
+            varMaxPower = -1.0              # default value
+        RW.maxPower = varMaxPower
 
         if 'fCoulomb' in kwargs:
             varfCoulomb = kwargs['fCoulomb']
