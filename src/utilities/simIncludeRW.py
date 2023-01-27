@@ -48,28 +48,28 @@ class rwFactory(object):
             RW manufacturing name.
         gsHat_B : list
             Spin axis unit vector gsHat in B-frame components
-        kwargs :
-            Omega : float
+        kwargs:
+            Omega: float
                 initial RW speed in RPM
-            Omega_max : float
+            Omega_max: float
                 maximum RW speed in RPM
-            rWB_B : list
+            rWB_B: list
                 3x1 list of RW center of mass position coordinates
-            RWModel : integer
+            RWModel: integer
                 RW model type such as BalancedWheels, JitterSimple and JitterFullyCoupled
-            useRWfriction : BOOL
+            useRWfriction: BOOL
                 conditional to turn on RW internal wheel friction
-            useMinTorque : BOOL
+            useMinTorque: BOOL
                 conditional to clip any torque below a minimum torque value
-            useMaxTorque : BOOL
+            useMaxTorque: BOOL
                 conditional to clip any torque value above a maximum torque value
             u_max: float
                 the maximum RW motor torque
-            maxMomentum : float
+            maxMomentum: float
                 maximum RW wheel momentum in Nms.  This is a required variable for some wheels.
-            maxPower : float
+            maxPower: float
                 the maximum allowed power
-            label : string
+            label: string
                 with the unique device name, must be 5 characters or less
             fCoulomb: float
                 Coulomb friction torque model coefficient
