@@ -91,6 +91,15 @@ class rwFactory(object):
         # create the blank RW object
         RW = messaging.RWConfigMsgPayload()
 
+        if 'maxMomentum' in kwargs:
+            varMaxMomentum = kwargs['maxMomentum']
+            if not isinstance(varMaxMomentum, float):
+                print('ERROR: maxMomentum must be a FLOAT argument')
+                exit(1)
+        else:
+            varMaxMomentum = 0.0              # default value
+        self.maxMomentum = varMaxMomentum
+
         # populate the RW object with the type specific parameters
         try:
             eval('self.' + rwType + '(RW)')
@@ -130,15 +139,6 @@ class rwFactory(object):
                 exit(1)
         else:
             varUseMaxTorque = True              # default value
-
-        if 'maxMomentum' in kwargs:
-            varMaxMomentum = kwargs['maxMomentum']
-            if not isinstance(varMaxMomentum, float):
-                print('ERROR: maxMomentum must be a FLOAT argument')
-                exit(1)
-        else:
-            varMaxMomentum = 0.0              # default value
-        self.maxMomentum = varMaxMomentum
 
         if 'maxPower' in kwargs:
             varMaxPower = kwargs['maxPower']
