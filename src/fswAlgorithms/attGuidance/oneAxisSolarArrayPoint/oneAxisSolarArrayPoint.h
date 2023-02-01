@@ -89,6 +89,13 @@ extern "C" {
     void Reset_oneAxisSolarArrayPoint(oneAxisSolarArrayPointConfig *configData, uint64_t callTime, int64_t moduleID);
     void Update_oneAxisSolarArrayPoint(oneAxisSolarArrayPointConfig *configData, uint64_t callTime, int64_t moduleID);
 
+    void computeFirstRotation(double hRefHat_B[3], double hReqHat_B[3], double R1B[3][3]);
+    void computeSecondRotation(double hRefHat_B[3], double rHat_SB_R1[3], double a1Hat_B[3], double a2Hat_B[3], double R2R1[3][3]);
+    void computeThirdRotation(int alignmentPriority, double hRefHat_B[3], double rHat_SB_R2[3], double a1Hat_B[3], double R3R2[3][3]);
+    void computeFinalRotation(int alignmentPriority, double BN[3][3], double rHat_SB_B[3], double hRefHat_B[3], double hReqHat_B[3], double a1Hat_B[3], double a2Hat_B[3], double RN[3][3]);
+
+    void v3Perpendicular(double x[3], double y[3]);
+
 #ifdef __cplusplus
 }
 #endif
