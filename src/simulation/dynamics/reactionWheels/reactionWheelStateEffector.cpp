@@ -526,6 +526,13 @@ void ReactionWheelStateEffector::ConfigureRWRequests(double CurrentTime)
 			CmdIt->u_cmd = 0.0;
 		}
 
+        // Power saturation
+        if (this->ReactionWheelData[RWIter]->maxPower > 0) {
+            if ((CmdIt->u_cmd * this->ReactionWheelData[RWIter]->Omega) >= this->ReactionWheelData[RWIter]->maxPower) {
+                CmdIt->u_cmd = this->ReactionWheelData[RWIter]->maxPower / this->ReactionWheelData[RWIter]->Omega
+            }
+        }
+
         // Speed saturation
         if (std::abs(this->ReactionWheelData[RWIter]->Omega) >= this->ReactionWheelData[RWIter]->Omega_max
             && this->ReactionWheelData[RWIter]->Omega_max > 0.0 /* negative Omega_max turns of wheel saturation modeling */
