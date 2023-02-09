@@ -49,6 +49,8 @@ Version |release|
 - Created a :ref:`prescribedMotionStateEffector` dynamics module for appending rigid bodies with prescribed motion
   to the spacecraft hub.
 - Added :ref:`solarArrayReference` to compute the reference angle and angle rate for a rotating solar array.
+- Created :ref:`oneAxisSolarArrayPoint` to generate the reference attitude for a spacecraft that needs to point a body-fixed 
+  axis along an inertial direction while ensuring maximum power generation on the solar arrays
 
 Version 2.1.6 (Jan. 21, 2023)
 -----------------------------
