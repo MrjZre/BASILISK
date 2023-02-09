@@ -68,7 +68,7 @@ class rwFactory(object):
             maxMomentum: float
                 maximum RW wheel momentum in Nms.  This is a required variable for some wheels.
             maxPower: float
-                the maximum allowed power
+                the maximum allowed wheel power
             label: string
                 with the unique device name, must be 5 characters or less
             fCoulomb: float
