@@ -43,10 +43,12 @@ void svIntegratorRK4::integrate(double currentTime, double timeStep)
     int i;              // dynamic object loop counter
 
     for (i=0; i<dynPtrs.size(); i++) {
-        stateOut.push_back(dynPtrs[i]->dynManager.getStateVector());
-        stateInit.push_back(dynPtrs[i]->dynManager.getStateVector());
-        dynPtrs[i]->equationsOfMotion(currentTime, timeStep);
-        for (it = dynPtrs[i]->dynManager.stateContainer.stateMap.begin(), itOut = stateOut[i].stateMap.begin(), itInit = stateInit[i].stateMap.begin(); it != dynPtrs[i]->dynManager.stateContainer.stateMap.end(); it++, itOut++, itInit++)
+        stateOut.push_back(dynPtrs.at(i)->dynManager.getStateVector());
+        stateInit.push_back(dynPtrs.at(i)->dynManager.getStateVector());
+        dynPtrs.at(i)->equationsOfMotion(currentTime, timeStep);
+    }
+    for (i=0; i<dynPtrs.size(); i++) {
+        for (it = dynPtrs.at(i)->dynManager.stateContainer.stateMap.begin(), itOut = stateOut.at(i).stateMap.begin(), itInit = stateInit.at(i).stateMap.begin(); it != dynPtrs.at(i)->dynManager.stateContainer.stateMap.end(); it++, itOut++, itInit++)
         {
             itOut->second.setDerivative(it->second.getStateDeriv());
             itOut->second.propagateState(timeStep / 6.0);
@@ -55,8 +57,10 @@ void svIntegratorRK4::integrate(double currentTime, double timeStep)
     }
 
     for (i=0; i<dynPtrs.size(); i++) {
-        dynPtrs[i]->equationsOfMotion(currentTime + timeStep * 0.5, timeStep);
-        for (it = dynPtrs[i]->dynManager.stateContainer.stateMap.begin(), itOut = stateOut[i].stateMap.begin(), itInit = stateInit[i].stateMap.begin(); it != dynPtrs[i]->dynManager.stateContainer.stateMap.end(); it++, itOut++, itInit++)
+        dynPtrs.at(i)->equationsOfMotion(currentTime + timeStep * 0.5, timeStep);
+    }
+    for (i=0; i<dynPtrs.size(); i++) {
+        for (it = dynPtrs.at(i)->dynManager.stateContainer.stateMap.begin(), itOut = stateOut.at(i).stateMap.begin(), itInit = stateInit.at(i).stateMap.begin(); it != dynPtrs.at(i)->dynManager.stateContainer.stateMap.end(); it++, itOut++, itInit++)
         {
             itOut->second.setDerivative(it->second.getStateDeriv());
             itOut->second.propagateState(2.0*timeStep / 6.0);
@@ -65,8 +69,10 @@ void svIntegratorRK4::integrate(double currentTime, double timeStep)
     }
 
     for (i=0; i<dynPtrs.size(); i++) {
-        dynPtrs[i]->equationsOfMotion(currentTime + timeStep * 0.5, timeStep);
-        for (it = dynPtrs[i]->dynManager.stateContainer.stateMap.begin(), itOut = stateOut[i].stateMap.begin(), itInit = stateInit[i].stateMap.begin(); it != dynPtrs[i]->dynManager.stateContainer.stateMap.end(); it++, itOut++, itInit++)
+        dynPtrs.at(i)->equationsOfMotion(currentTime + timeStep * 0.5, timeStep);
+    }
+    for (i=0; i<dynPtrs.size(); i++) {
+        for (it = dynPtrs.at(i)->dynManager.stateContainer.stateMap.begin(), itOut = stateOut.at(i).stateMap.begin(), itInit = stateInit.at(i).stateMap.begin(); it != dynPtrs.at(i)->dynManager.stateContainer.stateMap.end(); it++, itOut++, itInit++)
         {
             itOut->second.setDerivative(it->second.getStateDeriv());
             itOut->second.propagateState(2.0*timeStep / 6.0);
@@ -76,8 +82,10 @@ void svIntegratorRK4::integrate(double currentTime, double timeStep)
     }
 
     for (i=0; i<dynPtrs.size(); i++) {
-        dynPtrs[i]->equationsOfMotion(currentTime + timeStep, timeStep);
-        for (it = dynPtrs[i]->dynManager.stateContainer.stateMap.begin(), itOut = stateOut[i].stateMap.begin(), itInit = stateInit[i].stateMap.begin(); it != dynPtrs[i]->dynManager.stateContainer.stateMap.end(); it++, itOut++, itInit++)
+        dynPtrs.at(i)->equationsOfMotion(currentTime + timeStep, timeStep);
+    }
+    for (i=0; i<dynPtrs.size(); i++) {
+        for (it = dynPtrs.at(i)->dynManager.stateContainer.stateMap.begin(), itOut = stateOut.at(i).stateMap.begin(), itInit = stateInit.at(i).stateMap.begin(); it != dynPtrs.at(i)->dynManager.stateContainer.stateMap.end(); it++, itOut++, itInit++)
         {
             itOut->second.setDerivative(it->second.getStateDeriv());
             itOut->second.propagateState(timeStep / 6.0);
@@ -86,7 +94,7 @@ void svIntegratorRK4::integrate(double currentTime, double timeStep)
     }
 
     for (i=0; i<dynPtrs.size(); i++) {
-        dynPtrs[i]->dynManager.updateStateVector(stateOut[i]);
+        dynPtrs.at(i)->dynManager.updateStateVector(stateOut.at(i));
     }
 
     return;
