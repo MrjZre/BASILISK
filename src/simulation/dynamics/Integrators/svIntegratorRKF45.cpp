@@ -22,11 +22,8 @@
 #include "../_GeneralModuleFiles/dynamicObject.h"
 #include <stdio.h>
 #include <iostream>
-#include <Eigen/Dense>
 #include <vector>
 
-using namespace Eigen;
-using namespace std;
 
 svIntegratorRKF45::svIntegratorRKF45(DynamicObject* dyn) : StateVecIntegrator(dyn)
 {
