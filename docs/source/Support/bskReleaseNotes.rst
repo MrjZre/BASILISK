@@ -49,6 +49,7 @@ Version |release|
 - Created a :ref:`prescribedMotionStateEffector` dynamics module for appending rigid bodies with prescribed motion
   to the spacecraft hub.
 - Added :ref:`solarArrayReference` to compute the reference angle and angle rate for a rotating solar array.
+- Added :ref:`thrusterPlatformReference` to align the dual-gimballed thruster with the system's center of mass, or at an offset thereof to perform momentum dumping.
 
 Version 2.1.6 (Jan. 21, 2023)
 -----------------------------
