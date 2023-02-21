@@ -67,8 +67,8 @@ class rwFactory(object):
                 the maximum RW motor torque
             maxMomentum: float
                 maximum RW wheel momentum in Nms.  This is a required variable for some wheels.
-            maxPower: float
-                the maximum allowed wheel power
+            P_max: float
+                the maximum allowed wheel power for changing wheel speed (does not include a base power requirement)
             label: string
                 with the unique device name, must be 5 characters or less
             fCoulomb: float
@@ -133,14 +133,14 @@ class rwFactory(object):
             varMaxMomentum = 0.0              # default value
         self.maxMomentum = varMaxMomentum
 
-        if 'maxPower' in kwargs:
-            varMaxPower = kwargs['maxPower']
+        if 'P_max' in kwargs:
+            varMaxPower = kwargs['P_max']
             if not isinstance(varMaxPower, float):
-                print('ERROR: maxPower must be a FLOAT argument')
+                print('ERROR: P_max must be a FLOAT argument')
                 exit(1)
         else:
-            varMaxPower = -1.0              # default value
-        RW.maxPower = varMaxPower
+            varMaxPower = -1.0              # default value turns off max power limit
+        RW.P_max = varMaxPower
 
         if 'fCoulomb' in kwargs:
             varfCoulomb = kwargs['fCoulomb']
