@@ -206,7 +206,7 @@ def unitSimReactionWheel(show_plots, useFlag, testCase):
 
 
 # This statement below ensures that the unit test script can be run as a
-# stand-along python script
+# standalone python script
 if __name__ == "__main__":
     test_unitSimReactionWheel(
         False,  # show_plots
