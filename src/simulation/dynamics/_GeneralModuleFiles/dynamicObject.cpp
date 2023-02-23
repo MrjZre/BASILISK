@@ -74,7 +74,7 @@ void DynamicObject::integrateState(double integrateToThisTime)
             this->integrator->dynPtrs.at(i)->preIntegration(integrateToThisTime);
         }
 
-        this->integrator->integrate(this->timeBefore, this->localTimeStep);
+        this->integrator->integrate(this->timeBefore, this->timeStep);
 
         for (i = 0; i < this->integrator->dynPtrs.size(); i++) {
             this->integrator->dynPtrs.at(i)->postIntegration(integrateToThisTime);

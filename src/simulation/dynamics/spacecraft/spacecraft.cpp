@@ -460,7 +460,7 @@ void Spacecraft::equationsOfMotion(double integTimeSeconds, double timeStep)
  @param integrateToThisTime Time to integrate to
  */
 void Spacecraft::preIntegration(double integrateToThisTime) {
-    this->localTimeStep = integrateToThisTime - this->timePrevious;
+    this->timeStep = integrateToThisTime - this->timePrevious;
 
     // - Find v_CN_N before integration for accumulated DV
     Eigen::Vector3d oldV_BN_N = this->hubV_N->getState();  // - V_BN_N before integration
@@ -477,7 +477,7 @@ void Spacecraft::preIntegration(double integrateToThisTime) {
 
     // - Integrate the state from the last time (timeBefore) to the integrateToThisTime
     this->hub.matchGravitytoVelocityState(oldV_CN_N); // Set gravity velocity to base velocity for DV estimation
-    this->timeBefore = integrateToThisTime - this->localTimeStep;
+    this->timeBefore = integrateToThisTime - this->timeStep;
 
 }
 
@@ -511,13 +511,13 @@ void Spacecraft::postIntegration(double integrateToThisTime) {
 
     // - non-conservative acceleration of the body frame in the body frame
     this->nonConservativeAccelpntB_B = (newDcm_NB.transpose()*(newV_BN_N -
-                                                               this->hubGravVelocity->getState()))/this->localTimeStep;
+                                                               this->hubGravVelocity->getState()))/this->timeStep;
 
     // - angular acceleration in the body frame
     Eigen::Vector3d newOmega_BN_B;
     newOmega_BN_B = this->hubOmega_BN_B->getState();
-    if (fabs(this->localTimeStep) > 1e-10) {
-        this->omegaDot_BN_B = (newOmega_BN_B - this->oldOmega_BN_B)/this->localTimeStep; //angular acceleration of B wrt N in the Body frame
+    if (fabs(this->timeStep) > 1e-10) {
+        this->omegaDot_BN_B = (newOmega_BN_B - this->oldOmega_BN_B)/this->timeStep; //angular acceleration of B wrt N in the Body frame
     } else {
         this->omegaDot_BN_B = {0., 0., .0};
     }
